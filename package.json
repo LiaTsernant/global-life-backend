@@ -1,0 +1,30 @@
+{
+  "name": "global-life-backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LiaTsernant/global-life.git"
+  },
+  "author": "Yulia Tsernant",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/LiaTsernant/global-life/issues"
+  },
+  "homepage": "https://github.com/LiaTsernant/global-life#readme",
+  "dependencies": {
+    "aws-sdk": "^2.656.0",
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.19.0",
+    "connect-mongo": "^3.2.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "express-session": "^1.17.0",
+    "mongoose": "^5.9.7"
+  }
+}
