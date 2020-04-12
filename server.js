@@ -4,7 +4,6 @@ const app = express();
 const PORT = process.env.PORT || 4000;
 const routes = require("./routes");
 const cors = require("cors");
-const verifyToken = require('./middleware/verification');
 
 const corsOptions = {
     origin: ["http://localhost:3000"],
@@ -30,7 +29,7 @@ app.use((req, res, next) => {
 });
 
 // ROUTES-----------------------------------------------------------------
-app.use("/api/v1", verifyToken, routes.api);
+app.use("/api/v1", routes.api);
 
 // // Wrong api route
 app.use("/api/*", (req, res) => {
