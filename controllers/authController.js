@@ -29,6 +29,7 @@ const register = (req, res) => {
 
                 db.User.create(userInfo, (err, savedUser) => {
                     if (err) return res.status(500).json(err);
+
                     const token = jwt.sign(
                       {
                         email: savedUser.email,
@@ -40,33 +41,14 @@ const register = (req, res) => {
                         expiresIn: "30 days"
                       },
                     );
+                    // AUTO SENDING EMAIL
+                    // sendEmail(resUser.email, resUser.firstName);
 
                     return res.status(200).json({
                       message: 'User Created',
                       token
                     });
                 });
-
-
-
-                // db.User.create(userInfo, (err, newUser) => {
-                //     if (err) return res.status(404).json({ status: 404, error: "Cannot create a new user" });
-
-                //     const resUser = {
-                //         _id: newUser._id,
-                //         firstName: newUser.firstName,
-                //         lastName: newUser.lastName,
-                //         email: newUser.email,
-                //         address: newUser.address,
-                //         photo: newUser.photo,
-                //         contactPerson: newUser.contactPerson,
-                //         country: newUser.country
-                //     };
-                //     res.status(201).json({status: 201, user: resUser, message: "User Created!" });
-
-                //     // AUTO SENDING EMAIL
-                //     // sendEmail(resUser.email, resUser.firstName);
-                // });
             });
         });
     });
