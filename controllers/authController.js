@@ -1,5 +1,8 @@
 const db = require("../models");
 const bcrypt = require("bcryptjs");
+const jwt = require('jsonwebtoken');
+require('dotenv').config();
+
 // // let AWS = require('aws-sdk');
 // AWS.config.update({region: 'us-west-1'});
 // let sendEmail = require('../aws_ses');
@@ -23,24 +26,47 @@ const register = (req, res) => {
                     contactPerson: req.body.contactPerson,
                     country: req.body.country
                 };
-                db.User.create(userInfo, (err, newUser) => {
-                    if (err) return res.status(404).json({ status: 404, error: "Cannot create a new user" });
 
-                    const resUser = {
-                        _id: newUser._id,
-                        firstName: newUser.firstName,
-                        lastName: newUser.lastName,
-                        email: newUser.email,
-                        address: newUser.address,
-                        photo: newUser.photo,
-                        contactPerson: newUser.contactPerson,
-                        country: newUser.country
-                    };
-                    res.status(201).json({status: 201, user: resUser, message: "User Created!" });
+                db.User.create(userInfo, (err, savedUser) => {
+                    if (err) return res.status(500).json(err);
+                    const token = jwt.sign(
+                      {
+                        email: savedUser.email,
+                        _id: savedUser._id
+                      },
 
-                    // AUTO SENDING EMAIL
-                    // sendEmail(resUser.email, resUser.firstName);
+                      process.env.JWT_SECRET,
+                      {
+                        expiresIn: "30 days"
+                      },
+                    );
+
+                    return res.status(200).json({
+                      message: 'User Created',
+                      token
+                    });
                 });
+
+
+
+                // db.User.create(userInfo, (err, newUser) => {
+                //     if (err) return res.status(404).json({ status: 404, error: "Cannot create a new user" });
+
+                //     const resUser = {
+                //         _id: newUser._id,
+                //         firstName: newUser.firstName,
+                //         lastName: newUser.lastName,
+                //         email: newUser.email,
+                //         address: newUser.address,
+                //         photo: newUser.photo,
+                //         contactPerson: newUser.contactPerson,
+                //         country: newUser.country
+                //     };
+                //     res.status(201).json({status: 201, user: resUser, message: "User Created!" });
+
+                //     // AUTO SENDING EMAIL
+                //     // sendEmail(resUser.email, resUser.firstName);
+                // });
             });
         });
     });
@@ -54,18 +80,20 @@ const login = (req, res) => {
         bcrypt.compare(req.body.password, foundUser.password, (err, isMatch) => {
             if (err) return res.status(404).json({ status: 404, error: "Cannot login a user" });
             if (isMatch) {
-                const currentUser = {
-                    _id: foundUser._id,
-                    firstName: foundUser.firstName,
-                    lastName: foundUser.lastName,
-                    email: foundUser.email,
-                    address: foundUser.address,
-                    photo: foundUser.photo,
-                    contactPerson: foundUser.contactPerson,
-                    country: foundUser.country
-                };
-                req.session.currentUser = currentUser;
-                res.status(201).json({ status: 201, user: currentUser })
+                const token = jwt.sign(
+                  {
+                    username: foundUser.email,
+                    _id: foundUser._id
+                  },
+                  process.env.JWT_SECRET,
+                  {
+                    expiresIn: "30 days"
+                  },
+                );
+                return res.status(200).json({
+                  message: 'User Created',
+                  token
+                });
             } else {
                 res.status(404).json({ status: 404, error: "Cannot login. Please, try again." });
             };
