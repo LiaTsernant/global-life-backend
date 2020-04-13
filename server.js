@@ -6,7 +6,7 @@ const routes = require("./routes");
 const cors = require("cors");
 
 const corsOptions = {
-    origin: ["http://localhost:3000"],
+    origin: ["exp://192.168.8.189:19000"],
     methods: "GET, POST, PUT, DELETE",
     credentials: true,
     optionsSuccessStatus: 200
