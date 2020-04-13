@@ -7,6 +7,30 @@ const countries = [
         police: '102',
         firefighters: '101',
         crisisHotline:  '88002000122'
+    },
+
+    {
+        name: "Egypt",
+        emergency: '123',
+        police: '122',
+        firefighters: '180',
+        crisisHotline:  ''
+    },
+
+    {
+        name: "Greece",
+        emergency: '166',
+        police: '100',
+        firefighters: '199',
+        crisisHotline:  ''
+    },
+
+    {
+        name: "Italy",
+        emergency: '118',
+        police: '113',
+        firefighters: '115',
+        crisisHotline:  ''
     }
 ];
 
