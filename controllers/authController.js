@@ -64,7 +64,7 @@ const login = (req, res) => {
             if (isMatch) {
                 const token = jwt.sign(
                   {
-                    username: foundUser.email,
+                    email: foundUser.email,
                     _id: foundUser._id
                   },
                   process.env.JWT_SECRET,
@@ -73,7 +73,8 @@ const login = (req, res) => {
                   },
                 );
                 return res.status(200).json({
-                  message: 'User Created',
+                  status: 200,
+                  message: 'User Logged In',
                   token
                 });
             } else {
@@ -83,30 +84,30 @@ const login = (req, res) => {
     });
 };
 
-const logout = (req, res) => {
-    if (!req.session.currentUser) {
-        return res.status(404).json({ status: 404, error: "Cannot logout a user" });
-    };
+// const logout = (req, res) => {
+//     if (!req.session.currentUser) {
+//         return res.status(404).json({ status: 404, error: "Cannot logout a user" });
+//     };
 
-    req.session.destroy((err) => {
-        if (err) return res.status(404).json({ status: 404, error: "Cannot logout a user" });
-        res.status(201).json({ status: 201, message: "Logged out!" })
-    });
-};
+//     req.session.destroy((err) => {
+//         if (err) return res.status(404).json({ status: 404, error: "Cannot logout a user" });
+//         res.status(201).json({ status: 201, message: "Logged out!" })
+//     });
+// };
 
-const verify = (req, res) => {
-    if (req.session.currentUser) {
-        return res.json({
-            status: 200, 
-            message: "Authorized",
-            currentUser: req.session.currentUser
-        });
-    };
-};
+// const verify = (req, res) => {
+//     if (req.session.currentUser) {
+//         return res.json({
+//             status: 200, 
+//             message: "Authorized",
+//             currentUser: req.session.currentUser
+//         });
+//     };
+// };
 
 module.exports = {
     register,
     login,
-    logout,
-    verify,
+    // logout,
+    // verify,
 };
