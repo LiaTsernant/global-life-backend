@@ -3,12 +3,10 @@ const db = require("./models");
 const countries = [
     {
         name: "Russia",
-        resque: {
-            emergency: 103,
-            police: 102,
-            firefighters: 101,
-            crisisHotline:  88002000122
-        }
+        emergency: '103',
+        police: '102',
+        firefighters: '101',
+        crisisHotline:  '88002000122'
     }
 ];
 
