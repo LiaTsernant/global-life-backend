@@ -9,7 +9,7 @@ const index = (req, res) => {
 };
 
 const show = (req, res) => {
-  db.Country.findById(req.params.countryId, (err, foundCountry) => {
+  db.Country.findOne({ name: req.params.countryName }, (err, foundCountry) => {
     if (err) return res.status(404).json({ status: 404, error: "Cannot find a country`"});
     
     res.json(foundCountry);
