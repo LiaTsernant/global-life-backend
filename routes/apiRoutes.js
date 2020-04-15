@@ -14,7 +14,7 @@ router.post("/register", ctrl.auth.register);
 router.get("/users", ctrl.user.index);
 //--------------------- COUNTRY ---------------------
 router.get("/countries", ctrl.country.index);
-router.get("/countries/:countryId", ctrl.country.show);
+router.get("/countries/:countryName", ctrl.country.show);
 //--------------------- USER ---------------------
 router.get('/users', ctrl.user.index)
 router.get('/users/:userId', ctrl.user.show)
