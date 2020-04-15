@@ -5,12 +5,9 @@ const UserSchema = new mongoose.Schema({
     lastName: { required: true, type: String },
     email: { required: true, type: String },
     password: String,
-    address: { required: true, type: String },
+    address: String,
     photo: { type: String, default: "https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_960_720.png" },
-    contactPerson: {
-        firstName: { required: true, type: String },
-        phoneNumber: { required: true, type: Number },
-    },
+    contactPerson: String,
     country: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Country'
