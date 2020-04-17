@@ -1,8 +1,6 @@
 const express = require("express");
 const router = express.Router();
 const ctrl = require("../controllers");
-// const verifyToken = require('../middleware/verification');
-
 
 //--------------------- "api/v1/..." ---------------------
 
@@ -18,5 +16,7 @@ router.get("/countries/:countryName", ctrl.country.show);
 //--------------------- USER ---------------------
 router.get('/users', ctrl.user.index)
 router.get('/users/:userId', ctrl.user.show)
+router.put('/users/:userId', ctrl.user.update)
+router.delete('/users/:userId', ctrl.user.destroy)
 
 module.exports = router;
