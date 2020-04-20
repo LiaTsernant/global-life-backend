@@ -1,15 +1,12 @@
 const express = require("express");
 const bodyParser = require("body-parser");
-const session = require("express-session");
-const MongoStore = require("connect-mongo")(session);
 const app = express();
 const PORT = process.env.PORT || 4000;
-// const db = require('./models')
 const routes = require("./routes");
 const cors = require("cors");
 
 const corsOptions = {
-    origin: ["http://localhost:3000"],
+    origin: ["exp://192.168.8.189:19000"],
     methods: "GET, POST, PUT, DELETE",
     credentials: true,
     optionsSuccessStatus: 200
@@ -30,18 +27,6 @@ app.use((req, res, next) => {
   
     next();
 });
-
-app.use(session({
-    store: new MongoStore({
-        url: process.env.MONGODB_URI || "mongodb://localhost:27017/wayfarer",
-    }),
-    secret: "aqswdefrgthyjukilokmnjhbvgfcxdsza",
-    resave: false,
-    saveUninitialized: false,
-    cookie: {
-        maxAge: 1209600000, //1000 * 60 * 60 * 24 * 7 * 2 => 2 weeks
-    },
-}));
 
 // ROUTES-----------------------------------------------------------------
 app.use("/api/v1", routes.api);
