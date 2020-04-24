@@ -44,6 +44,7 @@ const register = (req, res) => {
             from: '+12055707505',
             to: '+14158665819'
           };
+
           client.messages
             .create(twilioMessage)
             .then(message => {
