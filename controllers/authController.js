@@ -1,6 +1,7 @@
 const db = require("../models");
 const bcrypt = require("bcryptjs");
 const jwt = require('jsonwebtoken');
+const client = require('../send_sms');
 require('dotenv').config();
 
 const register = (req, res) => {
