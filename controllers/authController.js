@@ -38,10 +38,23 @@ const register = (req, res) => {
             },
           );
 
-          return res.status(200).json({
-            message: 'User Created',
-            token
-          });
+          let twilioMessage = {
+            body: `${savedUser.firstName}! Thank you for registration at Global Life`,
+            from: '+12055707505',
+            to: '+14158665819'
+          };
+          client.messages
+            .create(twilioMessage)
+            .then(message => {
+              console.log(message.sid) //for testing
+
+              return res.status(200).json({
+                message: 'User Created',
+                messageSid: message.sid,
+                token
+              });
+            }
+          );
         });
       });
     });
