@@ -17,7 +17,8 @@ Thanks to our instructors who helped to make this real:
 JavaScript,  
 Node,  
 React Native,  
-MongoDB,  
+MongoDB,
+Twilio
 
 ![GL](https://wayfarer.s3.amazonaws.com/main.jpg)
 
